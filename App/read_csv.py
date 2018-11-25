@@ -13,7 +13,12 @@ def write_csv_to_sql():
 
 def db_get_row(organisation_name):
     search_string = "SELECT * FROM organisation WHERE organisation = \'{}\'".format(organisation_name)
-    sql_result = engine.execute(search_string).fetchone()
+    try:
+        sql_result = engine.execute(search_string).fetchone()
+    except Exception as e:
+        print("Error", sql_result, e)
+        return None
+
     service = Service(sql_result)
     return service.query_as_json()
 
