@@ -31,9 +31,12 @@ def organisation(organisation_name='The Julian Trust'):
 
     init_inmem_db()
     table_row = db_get_row(organisation_name)
-    print(table_row)
 
-    return render_template('Homepage.html')
+    if table_row is None:
+        return render_template('Homepage.html')
+    else:
+        print(table_row)
+        return render_template('OrganisationPage.html', organisation=table_row)
 
 
 

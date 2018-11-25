@@ -13,14 +13,13 @@ def write_csv_to_sql():
 
 def db_get_row(organisation_name):
     search_string = "SELECT * FROM organisation WHERE organisation = \'{}\'".format(organisation_name)
-    try:
-        sql_result = engine.execute(search_string).fetchone()
-    except Exception as e:
-        print("Error", sql_result, e)
+    sql_result = engine.execute(search_string).fetchone()
+    if sql_result is None:
+        print("Error query did not return a result ({} not found)".format(organisation_name))
         return None
-
-    service = Service(sql_result)
-    return service.query_as_json()
+    else:
+        service = Service(sql_result)
+        return service.query_as_json()
 
 def init_inmem_db():
     write_csv_to_sql()
