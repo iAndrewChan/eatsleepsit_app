@@ -11,11 +11,14 @@ def write_csv_to_sql():
     print(organisation.shape)
     organisation.to_sql("organisation", con=engine, if_exists='replace', index_label='id')
 
-def read_row(organisation_name):
+def db_get_row(organisation_name):
     search_string = "SELECT * FROM organisation WHERE organisation = \'{}\'".format(organisation_name)
     sql_result = engine.execute(search_string).fetchone()
     service = Service(sql_result)
-    print(service.query_as_json())
+    return service.query_as_json()
 
-write_csv_to_sql()
-read_row('The Julian Trust')
+def init_inmem_db():
+    write_csv_to_sql()
+
+if __name__ == "__main__":
+    db_get_row('The Julian Trust')
