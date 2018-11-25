@@ -4,8 +4,9 @@ import sqlite3
 # from database import db_session
 # from database import init_db
 # from models import Organisation
-from read_csv import init_inmem_db
-from read_csv import db_get_row
+
+# from read_csv import init_inmem_db
+# from read_csv import db_get_row
 
 from flask import render_template
 
@@ -19,9 +20,11 @@ def index(organisation_name='The Salvation Army Logos House'):
     # print(Organisation.query.all())
     # print(Organisation.query.filter(Organisation.name == 'admin').first())
 
-    init_inmem_db()
-    table_row = db_get_row(organisation_name)
-    print(table_row)
+    # init_inmem_db()
+    # table_row = db_get_row(organisation_name)
+    # print(table_row)
+
+
     return render_template('Homepage.html')
 
 @app.route("/contacts")
