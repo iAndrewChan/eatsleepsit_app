@@ -42,7 +42,8 @@ def sleep_page():
 
 @app.route("/sitting")
 def sit_page():
-    return 'sitting page'
+    return render_template('SitPage.html') 
+
 
 
 ########
